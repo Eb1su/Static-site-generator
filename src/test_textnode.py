@@ -4,7 +4,7 @@ from textnode import TextNode, TextType
 from htmlnode import LeafNode
 from text_to_html import text_node_to_html_node
 from inline_markdown import *
-from block_markdown import markdown_to_blocks
+from block_markdown import *
 
 class TestTextNode(unittest.TestCase):
     def test_eq(self):
@@ -218,6 +218,75 @@ This is the same paragraph on a new line
             ],
         )
 
+
+    def test_heading_to_heading_block(self):
+        node = '''
+### Testing
+'''
+        block = markdown_to_blocks(node)
+        block_type = block_to_block_type(block[0])
+        self.assertEqual(BlockType.HEADING, block_type)
+
+
+    def test_code_to_code_block(self):
+        node = '''
+```
+This is a code block
+```
+'''
+        block = markdown_to_blocks(node)
+        block_type = block_to_block_type(block[0])
+        self.assertEqual(BlockType.CODE, block_type)
+
+
+    def test_quote_to_quote_block(self):
+        node = '''
+> test
+> test
+'''
+        block = markdown_to_blocks(node)
+        block_type = block_to_block_type(block[0])
+        self.assertEqual(BlockType.QUOTE, block_type)
+
+
+    def test_unordered_to_unordered_block(self):
+        node = '''
+- test
+- test
+'''
+        block = markdown_to_blocks(node)
+        block_type = block_to_block_type(block[0])
+        self.assertEqual(BlockType.UNORDERED_LIST, block_type)
+
+
+    def test_ordered_to_ordered_block(self):
+        node = '''
+1. test
+2. test
+'''
+        block = markdown_to_blocks(node)
+        block_type = block_to_block_type(block[0])
+        self.assertEqual(BlockType.ORDERED_LIST, block_type)
+
+
+    def test_not_ordered_to_ordered_block(self):
+        node = '''
+3. test
+2. test
+4. test
+'''
+        block = markdown_to_blocks(node)
+        block_type = block_to_block_type(block[0])
+        self.assertNotEqual(BlockType.ORDERED_LIST, block_type)
+
+
+    def test_paragraph_to_paragraph_block(self):
+        node = '''
+Hello world! This is a test!
+'''
+        block = markdown_to_blocks(node)
+        block_type = block_to_block_type(block[0])
+        self.assertEqual(BlockType.PARAGRAPH, block_type)
 
 
 
