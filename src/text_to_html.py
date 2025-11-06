@@ -1,7 +1,7 @@
 from textnode import TextNode, TextType
 from htmlnode import LeafNode
 
-def text_node_to_html_node(text_node):
+def text_node_to_html_node_test(text_node):
     if not isinstance(text_node, TextNode):
         raise Exception('Invalid type')
 
