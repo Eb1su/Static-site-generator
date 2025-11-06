@@ -1,7 +1,10 @@
 from textnode import TextNode, TextType
+from copystatic import create_or_clear_public, copystatic
+
 
 def main():
-    dummy = TextNode('This is some anchor text', TextType.LINK, 'https://www.boot.dev')
-    print(dummy)
+    create_or_clear_public()
+    copystatic("./static", "./public")
+
 
 main()
