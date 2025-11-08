@@ -157,5 +157,5 @@ def text_node_to_html_node(node):
             children=[LeafNode(tag=None, value=node.text)],
         )
     if node.text_type == TextType.IMAGE:
-        return ParentNode(tag="img", props={"src": node.url, "alt": node.text})
+        return ParentNode(tag="img", children=[], props={"src": node.url, "alt": node.text})
     raise ValueError("Unknown text type")
