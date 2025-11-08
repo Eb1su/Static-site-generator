@@ -3,9 +3,9 @@ import shutil
 
 
 def create_or_clear_public():
-    if os.path.exists("./public"):
-        shutil.rmtree("./public")
-    os.mkdir("./public")
+    if os.path.exists("./docs"):
+        shutil.rmtree("./docs")
+    os.mkdir("./docs")
 
 
 def copystatic(src, dst):
